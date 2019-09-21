@@ -32,46 +32,56 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var core;
-(function (core) {
+var yt;
+(function (yt) {
     var SoundManager = /** @class */ (function (_super) {
         __extends(SoundManager, _super);
         function SoundManager() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             /** 声音播放器 */
-            _this.musicPlayer = new core.MusicPlayer;
-            _this.effectPlayer = new core.EffectPlayer;
+            _this.musicPlayer = new yt.MusicPlayer;
+            _this.effectPlayer = new yt.EffectPlayer;
             /** 是否静音 */
-            _this.mute = false;
+            _this.soundMute = false;
+            _this.musicMute = false;
             return _this;
         }
-        SoundManager.prototype.setMute = function (mute) {
-            this.mute = mute;
+        SoundManager.prototype.setSoundMute = function (mute) {
+            this.soundMute = mute;
             if (mute) {
-                this.musicPlayer.stopSound();
                 this.effectPlayer.stopSound();
             }
+        };
+        SoundManager.prototype.setMusicMute = function (mute) {
+            this.musicMute = mute;
+            if (mute) {
+                this.musicPlayer.stopSound();
+            }
             else {
-                this.musicPlayer.playSound();
+                this.musicPlayer.playSound(this.bgmUrl);
             }
         };
-        SoundManager.prototype.isMute = function () {
-            return this.mute;
+        SoundManager.prototype.isSoundMute = function () {
+            return this.soundMute;
+        };
+        SoundManager.prototype.isMusicMute = function () {
+            return this.musicMute;
         };
         SoundManager.prototype.playMusic = function (url) {
-            if (this.mute) {
+            this.bgmUrl = url;
+            if (this.musicMute) {
                 return;
             }
             this.musicPlayer.playSound(url);
         };
         SoundManager.prototype.playSound = function (url) {
-            if (this.mute) {
+            if (this.soundMute) {
                 return;
             }
             this.effectPlayer.playSound(url);
         };
         return SoundManager;
     }(Singleton));
-    core.SoundMgr = new SoundManager;
-})(core || (core = {}));
+    yt.Sound = new SoundManager;
+})(yt || (yt = {}));
 //# sourceMappingURL=SoundManager.js.map

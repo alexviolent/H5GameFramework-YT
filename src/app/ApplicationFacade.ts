@@ -1,6 +1,4 @@
-class ApplicationFacade extends puremvc.Facade implements puremvc.IFacade {
-    public static STARTUP: string = "STARTUP";
-
+class ApplicationFacade extends ApplicationFacadeBase {
 
     public static get I(): ApplicationFacade {
         if (!puremvc.Facade.instance)
@@ -13,12 +11,8 @@ class ApplicationFacade extends puremvc.Facade implements puremvc.IFacade {
         this.registerCommand(ApplicationFacade.STARTUP, StartupCommand);
     }
 
-    /**
-     * 启动
-     */
     public startup(stage: DisplayObject) {
-        this.sendNotification(ApplicationFacade.STARTUP, stage);
-        this.removeCommand(ApplicationFacade.STARTUP);
+        super.startup(stage);
     }
 
 }

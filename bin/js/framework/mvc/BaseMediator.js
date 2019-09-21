@@ -76,26 +76,35 @@ var BaseMediator = /** @class */ (function (_super) {
         var _this = _super.call(this, name, null) || this;
         /** 资源是否已经加载过 */
         _this.isResLoaded = false;
-        _this.viewParent = viewParent;
         _this.subMediators = [];
+        if (viewParent) {
+            _this.viewParent = viewParent;
+        }
         return _this;
     }
+    BaseMediator.prototype.init = function (viewParent) {
+        if (viewParent) {
+            this.viewParent = viewParent;
+        }
+        this.subMediators = [];
+    };
     /**
      * 获取实例，不必每次使用都new一次，
      * 不再使用此类对象，需要调用free的来回收
      */
     BaseMediator.get = function () {
+        var _a, _b;
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
-        var _a;
         var self = this;
         if (!self.instance) {
             self.instance = new (this.bind.apply(this, [void 0].concat(args)))();
+            (_a = self.instance).init.apply(_a, args);
         }
         else {
-            (_a = self.instance).constructor.apply(_a, args);
+            (_b = self.instance).init.apply(_b, args);
         }
         return self.instance;
     };
@@ -117,9 +126,12 @@ var BaseMediator = /** @class */ (function (_super) {
                         if (!!this.isResLoaded) return [3 /*break*/, 3];
                         loader = this.onCreateResourceLoader();
                         if (!loader) return [3 /*break*/, 2];
+                        this.facade.registerMediator(LoadingMediator.get());
+                        loader.setOnProgressListener(LoadingMediator.get());
                         return [4 /*yield*/, loader.startLoading()];
                     case 1:
                         _a.sent();
+                        this.facade.removeMediator(LoadingMediator.NAME);
                         _a.label = 2;
                     case 2:
                         this.isResLoaded = true;
@@ -130,9 +142,10 @@ var BaseMediator = /** @class */ (function (_super) {
                             this.viewComponent = this.onCreateView();
                         }
                         // 添加到view父节点
-                        if (this.viewComponent) {
+                        if (this.viewComponent && this.viewParent) {
                             this.viewParent.addChild(this.viewComponent);
                         }
+                        this.facade.sendNotification(BaseMediator.REGISTER, this.getMediatorName());
                         return [2 /*return*/];
                 }
             });
@@ -148,6 +161,7 @@ var BaseMediator = /** @class */ (function (_super) {
         // 移除view
         this.viewParent.removeChild(this.viewComponent);
         this.viewComponent = undefined;
+        this.facade.sendNotification(BaseMediator.REMOVE, this.getMediatorName());
     };
     /** 初始化界面内的子节点 */
     BaseMediator.prototype.initializeSubMediator = function () {
@@ -162,6 +176,21 @@ var BaseMediator = /** @class */ (function (_super) {
     };
     BaseMediator.prototype.handleNotification = function (note) {
     };
+    BaseMediator.REGISTER = "app_notify_registerMediator";
+    BaseMediator.REMOVE = "app_notify_removeMediator";
     return BaseMediator;
 }(puremvc.Mediator));
+/**
+ * 获取Mediator的装饰器
+ * @param mediator
+ */
+function Mediator(mediator) {
+    return function (target, propertyName) {
+        Object.defineProperty(target, propertyName, {
+            get: function () {
+                return ApplicationFacade.I.retrieveMediator(mediator.NAME);
+            }
+        });
+    };
+}
 //# sourceMappingURL=BaseMediator.js.map

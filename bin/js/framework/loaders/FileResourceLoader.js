@@ -67,8 +67,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var core;
-(function (core) {
+var yt;
+(function (yt) {
     var FileResourceLoader = /** @class */ (function (_super) {
         __extends(FileResourceLoader, _super);
         function FileResourceLoader(files, listener) {
@@ -84,7 +84,7 @@ var core;
             });
         };
         return FileResourceLoader;
-    }(core.BaseResourceLoader));
-    core.FileResourceLoader = FileResourceLoader;
-})(core || (core = {}));
+    }(yt.BaseResourceLoader));
+    yt.FileResourceLoader = FileResourceLoader;
+})(yt || (yt = {}));
 //# sourceMappingURL=FileResourceLoader.js.map

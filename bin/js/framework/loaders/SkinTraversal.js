@@ -19,8 +19,8 @@
  * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-var core;
-(function (core) {
+var yt;
+(function (yt) {
     /*
     * 遍历出laya的ui结构中用到的资源;
     */
@@ -33,6 +33,9 @@ var core;
             return skins;
         };
         SkinTraversal.traverseChild = function (root, skins) {
+            if (!root.child) {
+                return;
+            }
             for (var _i = 0, _a = root.child; _i < _a.length; _i++) {
                 var child = _a[_i];
                 if (child.props && child.props.skin) {
@@ -45,6 +48,6 @@ var core;
         };
         return SkinTraversal;
     }());
-    core.SkinTraversal = SkinTraversal;
-})(core || (core = {}));
+    yt.SkinTraversal = SkinTraversal;
+})(yt || (yt = {}));
 //# sourceMappingURL=SkinTraversal.js.map

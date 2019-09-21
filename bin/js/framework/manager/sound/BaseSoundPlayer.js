@@ -19,8 +19,8 @@
  * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-var core;
-(function (core) {
+var yt;
+(function (yt) {
     /**
      * 声音播放器模板基类
      */
@@ -29,6 +29,6 @@ var core;
         }
         return BaseSoundPlayer;
     }());
-    core.BaseSoundPlayer = BaseSoundPlayer;
-})(core || (core = {}));
+    yt.BaseSoundPlayer = BaseSoundPlayer;
+})(yt || (yt = {}));
 //# sourceMappingURL=BaseSoundPlayer.js.map

@@ -32,8 +32,8 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var core;
-(function (core) {
+var yt;
+(function (yt) {
     var MusicPlayer = /** @class */ (function (_super) {
         __extends(MusicPlayer, _super);
         function MusicPlayer() {
@@ -51,7 +51,7 @@ var core;
             Laya.SoundManager.playMusic(url);
         };
         return MusicPlayer;
-    }(core.BaseSoundPlayer));
-    core.MusicPlayer = MusicPlayer;
-})(core || (core = {}));
+    }(yt.BaseSoundPlayer));
+    yt.MusicPlayer = MusicPlayer;
+})(yt || (yt = {}));
 //# sourceMappingURL=MusicPlayer.js.map

@@ -20,49 +20,63 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace core {
+namespace yt {
     class SoundManager extends Singleton {
         /** 声音播放器 */
         private musicPlayer: BaseSoundPlayer = new MusicPlayer;
         private effectPlayer: BaseSoundPlayer = new EffectPlayer;
 
-        /** 是否静音 */
-        private mute: boolean = false;
+        private bgmUrl: string;
 
-        public setMute(mute: boolean) {
-            this.mute = mute;
+        /** 是否静音 */
+        private soundMute: boolean = false;
+        private musicMute: boolean = false;
+
+        public setSoundMute(mute: boolean) {
+            this.soundMute = mute;
 
             if (mute) {
-                this.musicPlayer.stopSound();
                 this.effectPlayer.stopSound();
-            } else {
-                this.musicPlayer.playSound();
             }
         }
 
-        public isMute(): boolean {
-            return this.mute;
+        public setMusicMute(mute: boolean) {
+            this.musicMute = mute;
+
+            if (mute) {
+                this.musicPlayer.stopSound();
+            } else {
+                this.musicPlayer.playSound(this.bgmUrl);
+            }
         }
 
-        playMusic(url:string) {
-            if (this.mute) {
+        public isSoundMute(): boolean {
+            return this.soundMute;
+        }
+
+        public isMusicMute(): boolean {
+            return this.musicMute;
+        }
+
+        playMusic(url: string) {
+            this.bgmUrl = url;
+
+            if (this.musicMute) {
                 return;
             }
 
             this.musicPlayer.playSound(url);
         }
 
-        private playSound(url: string) {
-            if (this.mute) {
+        playSound(url: string) {
+            if (this.soundMute) {
                 return;
             }
 
             this.effectPlayer.playSound(url);
         }
 
-
-
     }
 
-    export const SoundMgr = new SoundManager;
+    export const Sound = new SoundManager;
 }

@@ -14,9 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 var GameProxy = /** @class */ (function (_super) {
     __extends(GameProxy, _super);
     function GameProxy() {
-        var _this = _super.call(this, GameProxy.NAME) || this;
-        _this.viewCount = 0;
-        return _this;
+        return _super.call(this, GameProxy.NAME) || this;
     }
     GameProxy.NAME = "GameProxy";
     return GameProxy;

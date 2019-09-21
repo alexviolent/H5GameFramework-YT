@@ -47,44 +47,71 @@
 	<!-- 物理引擎matter.js -->
 	<!--用户自定义顺序文件添加到这里-->
 	<!--jsfile--Custom-->
-    <script type="text/javascript" src="libs/puremvc.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/interfaces/IView.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/interfaces/IProxy.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/interfaces/IObserver.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/interfaces/INotifier.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/interfaces/INotification.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/interfaces/IModel.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/interfaces/IMediator.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/interfaces/IFacade.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/interfaces/IController.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/interfaces/ICommand.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/core/View.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/core/Model.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/core/Controller.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/patterns/observer/Observer.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/patterns/observer/Notifier.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/patterns/observer/Notification.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/patterns/facade/Facade.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/patterns/command/MacroCommand.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/patterns/mediator/Mediator.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/patterns/command/SimpleCommand.js"></script>
+	<script src="js/framework/mvc/org/puremvc/typescript/patterns/proxy/Proxy.js"></script>
+	<script src="js/framework/mvc/BaseProxy.js"></script>
+	<script src="js/framework/mvc/BaseMediator.js"></script>
+	<script src="js/framework/mvc/BaseCommand.js"></script>
 	<!--jsfile--Custom-->
 
 	<!--自定义的js(src文件夹下)文件自动添加到下面jsfile模块标签里面里-->
 	<!--删除标签，ide不会自动添加js文件，请谨慎操作-->
 	<!--jsfile--startTag-->
+	<script src="js/framework/presence/IPresence.js"></script>
+	<script src="js/framework/pool/ObjectPool.js"></script>
+	<script src="js/framework/network/HttpClient.js"></script>
+	<script src="js/framework/mvc/SubMediator.js"></script>
+	<script src="js/framework/manager/ticker/TickerManager.js"></script>
+	<script src="js/framework/manager/ticker/SimpleSignal.js"></script>
+	<script src="js/framework/manager/ticker/FrameTicker.js"></script>
 	<script src="js/framework/manager/sound/BaseSoundPlayer.js"></script>
-	<script src="js/framework/manager/TimerManager.js"></script>
+	<script src="js/framework/manager/resource/ResourceManager.js"></script>
 	<script src="js/framework/loaders/SkinTraversal.js"></script>
-	<script src="js/framework/loaders/IProgressListener.js"></script>
 	<script src="js/framework/loaders/BaseResourceLoader.js"></script>
 	<script src="js/framework/abc/Singleton.js"></script>
-	<script src="js/framework/abc/ObjectPool.js"></script>
-	<script src="js/app/view/index/IndexContract.js"></script>
+	<script src="js/framework/ApplicationFacadeBase.js"></script>
 	<script src="js/app/ApplicationFacade.js"></script>
-	<script src="js/framework/mvc/BaseCommand.js"></script>
 	<script src="js/app/controller/StartupCommand.js"></script>
-	<script src="js/framework/mvc/BaseProxy.js"></script>
 	<script src="js/app/model/GameProxy.js"></script>
-	<script src="js/app/view/AppContextMediator.js"></script>
-	<script src="js/framework/mvc/BaseMediator.js"></script>
-	<script src="js/app/view/game/ExitConfirmMediator.js"></script>
-	<script src="js/app/view/game/GameMediator.js"></script>
-	<script src="js/app/view/index/IndexMediator.js"></script>
-	<script src="js/ui/layaUI.max.all.js"></script>
-	<script src="js/app/view/index/IndexView.js"></script>
-	<script src="js/framework/AppDef.js"></script>
+	<script src="js/app/view/LoadingMediator.js"></script>
+	<script src="js/app/view/TestMediator.js"></script>
+	<script src="js/framework/abc/DisplayObject.js"></script>
+	<script src="js/framework/AppContextMediator.js"></script>
 	<script src="js/framework/loaders/FileResourceLoader.js"></script>
+	<script src="js/framework/loaders/IProgressListener.js"></script>
 	<script src="js/framework/loaders/GroupResourceLoader.js"></script>
 	<script src="js/framework/loaders/ViewResourceLoader.js"></script>
 	<script src="js/framework/manager/sound/EffectPlayer.js"></script>
 	<script src="js/framework/manager/sound/MusicPlayer.js"></script>
 	<script src="js/framework/manager/sound/SoundManager.js"></script>
+	<script src="js/framework/pool/HttpClientPool.js"></script>
+	<script src="js/framework/pool/TickerPool.js"></script>
+	<script src="js/framework/presence/LocalPresence.js"></script>
+	<script src="js/ui/layaUI.max.all.js"></script>
 	<!--jsfile--endTag-->
 
 	<!--启动类添加到这里-->
 	<!--jsfile--Main-->
-	<script src="js/Main.js"></script>
+	<script src="js/LayaUISample.js"></script>
 	<!--jsfile--Main-->
 </body>
 

@@ -20,7 +20,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-module core {
+module yt {
 	export class ViewResourceLoader extends BaseResourceLoader {
 		private uiView: any;
 
@@ -31,6 +31,9 @@ module core {
 
 		public async startLoading() {
 			let skins = SkinTraversal.listSkins(this.uiView);
+			if (skins.length == 0) {
+				return new Promise((resolve) => resolve(null));
+			}
 			return this.load(skins);
 		}
 	}

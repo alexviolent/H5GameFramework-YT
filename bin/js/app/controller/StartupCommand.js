@@ -25,8 +25,7 @@ var StartupCommand = /** @class */ (function (_super) {
     StartupCommand.prototype.execute = function (note) {
         _super.prototype.execute.call(this, note);
         this.facade.registerProxy(new GameProxy());
-        this.facade.registerMediator(new AppContextMediator(note.getBody()));
-        this.facade.registerMediator(IndexMediator.get());
+        this.facade.registerMediator(TestMediator.get());
     };
     return StartupCommand;
 }(BaseMacroCommand));

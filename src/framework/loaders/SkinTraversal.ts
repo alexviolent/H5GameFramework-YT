@@ -20,7 +20,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace core {
+namespace yt {
     /*
     * 遍历出laya的ui结构中用到的资源;
     */
@@ -32,6 +32,10 @@ namespace core {
         }
 
         private static traverseChild(root: any, skins: string[]) {
+            if(!root.child) {
+                return;
+            }
+            
             for (let child of root.child) {
                 if (child.props && child.props.skin) {
                     skins.push(child.props.skin);

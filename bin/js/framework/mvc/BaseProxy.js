@@ -21,4 +21,17 @@ var BaseProxy = /** @class */ (function (_super) {
     }
     return BaseProxy;
 }(puremvc.Proxy));
+/**
+ * 获取Proxy的装饰器
+ * @param proxy
+ */
+function Proxy(proxy) {
+    return function (target, propertyName) {
+        Object.defineProperty(target, propertyName, {
+            get: function () {
+                return ApplicationFacade.I.retrieveProxy(proxy.NAME);
+            }
+        });
+    };
+}
 //# sourceMappingURL=BaseProxy.js.map

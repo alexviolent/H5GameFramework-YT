@@ -1,10 +1,4 @@
 D .
-R 91D23166 bg.png
-R 17A08899 bg2.png
-R 8F13FC4A btn_back.png
-R 17EC9790 btn_close.png
-R 7114A876 btn_exit.png
-R 39FA5142 btn_guanqia.png
 D comp
 P D12221A9 bg.png
 P 9401CC40 blank.png

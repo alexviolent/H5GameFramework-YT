@@ -23,7 +23,10 @@
 /*
 * view媒介基类;
 */
-abstract class BaseMediator<T=any> extends puremvc.Mediator {
+abstract class BaseMediator<T = any> extends puremvc.Mediator {
+    public static REGISTER = "app_notify_registerMediator";
+    public static REMOVE = "app_notify_removeMediator";
+
     viewParent: DisplayObject;
     viewComponent: T;
     /** 一个界面内的子节点 */
@@ -33,12 +36,22 @@ abstract class BaseMediator<T=any> extends puremvc.Mediator {
 
     constructor(name: string, viewParent: DisplayObject) {
         super(name, null);
-        this.viewParent = viewParent;
+        this.subMediators = [];
+        
+        if (viewParent) {
+            this.viewParent = viewParent;
+        }
+    }
+
+    public init(viewParent: DisplayObject) {
+        if (viewParent) {
+            this.viewParent = viewParent;
+        }
         this.subMediators = [];
     }
 
     // 子类必须实现该方法，返回资源加载器
-    protected abstract onCreateResourceLoader(): core.BaseResourceLoader;
+    protected abstract onCreateResourceLoader(): yt.BaseResourceLoader;
 
     // 子类必须实现该方法，返回创建的view实例
     protected abstract onCreateView(): T;
@@ -51,8 +64,9 @@ abstract class BaseMediator<T=any> extends puremvc.Mediator {
         let self = <any>this;
         if (!self.instance) {
             self.instance = new this(...args);
-        } else{
-            self.instance.constructor(...args);
+            self.instance.init(...args);
+        } else {
+            self.instance.init(...args);
         }
         return self.instance;
     }
@@ -72,7 +86,10 @@ abstract class BaseMediator<T=any> extends puremvc.Mediator {
         if (!this.isResLoaded) {
             let loader = this.onCreateResourceLoader();
             if (loader) {
+                this.facade.registerMediator(LoadingMediator.get());
+                loader.setOnProgressListener(LoadingMediator.get());
                 await loader.startLoading();
+                this.facade.removeMediator(LoadingMediator.NAME);
             }
             this.isResLoaded = true;
         }
@@ -83,9 +100,11 @@ abstract class BaseMediator<T=any> extends puremvc.Mediator {
         }
 
         // 添加到view父节点
-        if (this.viewComponent) {
+        if (this.viewComponent && this.viewParent) {
             this.viewParent.addChild(<any>this.viewComponent);
         }
+
+        this.facade.sendNotification(BaseMediator.REGISTER, this.getMediatorName());
     }
 
     onRemove() {
@@ -98,6 +117,8 @@ abstract class BaseMediator<T=any> extends puremvc.Mediator {
         // 移除view
         this.viewParent.removeChild(<any>this.viewComponent);
         this.viewComponent = undefined;
+
+        this.facade.sendNotification(BaseMediator.REMOVE, this.getMediatorName());
     }
 
     /** 初始化界面内的子节点 */
@@ -118,6 +139,18 @@ abstract class BaseMediator<T=any> extends puremvc.Mediator {
     handleNotification(note: puremvc.INotification) {
 
     }
+}
 
-
+/**
+ * 获取Mediator的装饰器
+ * @param mediator 
+ */
+function Mediator(mediator: any) {
+    return (target: any, propertyName: string) => {
+        Object.defineProperty(target, propertyName, {
+            get: () => {
+                return ApplicationFacade.I.retrieveMediator(mediator.NAME);
+            }
+        });
+    }
 }

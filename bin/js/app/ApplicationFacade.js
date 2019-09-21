@@ -29,14 +29,9 @@ var ApplicationFacade = /** @class */ (function (_super) {
         _super.prototype.initializeController.call(this);
         this.registerCommand(ApplicationFacade.STARTUP, StartupCommand);
     };
-    /**
-     * 启动
-     */
     ApplicationFacade.prototype.startup = function (stage) {
-        this.sendNotification(ApplicationFacade.STARTUP, stage);
-        this.removeCommand(ApplicationFacade.STARTUP);
+        _super.prototype.startup.call(this, stage);
     };
-    ApplicationFacade.STARTUP = "STARTUP";
     return ApplicationFacade;
-}(puremvc.Facade));
+}(ApplicationFacadeBase));
 //# sourceMappingURL=ApplicationFacade.js.map

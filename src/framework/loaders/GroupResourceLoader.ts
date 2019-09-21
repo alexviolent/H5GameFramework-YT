@@ -20,22 +20,38 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-module core {
-	export class GroupResourceLoader extends BaseResourceLoader {
+module yt {
+	export class GroupResourceLoader extends BaseResourceLoader implements IProgressListener {
 		private loaders: BaseResourceLoader[];
+		/** 百分比比例 */
+		private ratio: number;
+		/** 当前总进度 */
+		private totalProgress: number;
+		/** 当前加载序号 */
+		private curLoaderIndex: number;
 
 		constructor(loaders: BaseResourceLoader[], listener?: IProgressListener) {
 			super(listener);
 			this.loaders = loaders;
+			this.ratio = 1 / loaders.length;
+
 			for (let loader of loaders) {
-				loader.setOnProgressListener(listener);
+				loader.setOnProgressListener(this);
 			}
 		}
 
 		public async startLoading() {
+			this.totalProgress = 0;
+			this.curLoaderIndex = 0;
 			for (let loader of this.loaders) {
 				await loader.startLoading();
+				this.totalProgress += this.ratio;
+				this.curLoaderIndex++;
 			}
+		}
+
+		onProgress(value: number) {
+			this.onProgressListener.onProgress(this.totalProgress + value * this.ratio);
 		}
 	}
 }

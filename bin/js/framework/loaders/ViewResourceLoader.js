@@ -67,8 +67,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var core;
-(function (core) {
+var yt;
+(function (yt) {
     var ViewResourceLoader = /** @class */ (function (_super) {
         __extends(ViewResourceLoader, _super);
         function ViewResourceLoader(uiView, listener) {
@@ -80,13 +80,16 @@ var core;
             return __awaiter(this, void 0, void 0, function () {
                 var skins;
                 return __generator(this, function (_a) {
-                    skins = core.SkinTraversal.listSkins(this.uiView);
+                    skins = yt.SkinTraversal.listSkins(this.uiView);
+                    if (skins.length == 0) {
+                        return [2 /*return*/, new Promise(function (resolve) { return resolve(null); })];
+                    }
                     return [2 /*return*/, this.load(skins)];
                 });
             });
         };
         return ViewResourceLoader;
-    }(core.BaseResourceLoader));
-    core.ViewResourceLoader = ViewResourceLoader;
-})(core || (core = {}));
+    }(yt.BaseResourceLoader));
+    yt.ViewResourceLoader = ViewResourceLoader;
+})(yt || (yt = {}));
 //# sourceMappingURL=ViewResourceLoader.js.map

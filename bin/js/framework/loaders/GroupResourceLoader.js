@@ -67,16 +67,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var core;
-(function (core) {
+var yt;
+(function (yt) {
     var GroupResourceLoader = /** @class */ (function (_super) {
         __extends(GroupResourceLoader, _super);
         function GroupResourceLoader(loaders, listener) {
             var _this = _super.call(this, listener) || this;
             _this.loaders = loaders;
+            _this.ratio = 1 / loaders.length;
             for (var _i = 0, loaders_1 = loaders; _i < loaders_1.length; _i++) {
                 var loader = loaders_1[_i];
-                loader.setOnProgressListener(listener);
+                loader.setOnProgressListener(_this);
             }
             return _this;
         }
@@ -86,6 +87,8 @@ var core;
                 return __generator(this, function (_b) {
                     switch (_b.label) {
                         case 0:
+                            this.totalProgress = 0;
+                            this.curLoaderIndex = 0;
                             _i = 0, _a = this.loaders;
                             _b.label = 1;
                         case 1:
@@ -94,6 +97,8 @@ var core;
                             return [4 /*yield*/, loader.startLoading()];
                         case 2:
                             _b.sent();
+                            this.totalProgress += this.ratio;
+                            this.curLoaderIndex++;
                             _b.label = 3;
                         case 3:
                             _i++;
@@ -103,8 +108,11 @@ var core;
                 });
             });
         };
+        GroupResourceLoader.prototype.onProgress = function (value) {
+            this.onProgressListener.onProgress(this.totalProgress + value * this.ratio);
+        };
         return GroupResourceLoader;
-    }(core.BaseResourceLoader));
-    core.GroupResourceLoader = GroupResourceLoader;
-})(core || (core = {}));
+    }(yt.BaseResourceLoader));
+    yt.GroupResourceLoader = GroupResourceLoader;
+})(yt || (yt = {}));
 //# sourceMappingURL=GroupResourceLoader.js.map

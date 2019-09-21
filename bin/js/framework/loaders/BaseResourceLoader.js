@@ -54,8 +54,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var core;
-(function (core) {
+var yt;
+(function (yt) {
     var BaseResourceLoader = /** @class */ (function () {
         function BaseResourceLoader(listener) {
             this.onProgressListener = undefined;
@@ -82,6 +82,6 @@ var core;
         };
         return BaseResourceLoader;
     }());
-    core.BaseResourceLoader = BaseResourceLoader;
-})(core || (core = {}));
+    yt.BaseResourceLoader = BaseResourceLoader;
+})(yt || (yt = {}));
 //# sourceMappingURL=BaseResourceLoader.js.map

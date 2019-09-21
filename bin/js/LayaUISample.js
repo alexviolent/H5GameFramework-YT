@@ -66,11 +66,6 @@ Laya.init(600, 400, WebGL);
 //激活资源版本控制
 Laya.ResourceVersion.enable("version.json", Handler.create(null, beginLoad), Laya.ResourceVersion.FILENAME_VERSION);
 function beginLoad() {
-    Laya.loader.load("res/atlas/comp.atlas", Handler.create(null, onLoaded));
-}
-function onLoaded() {
-    //实例UI界面
-    var testUI = new TestUI();
-    Laya.stage.addChild(testUI);
+    ApplicationFacade.I.startup(Laya.stage);
 }
 //# sourceMappingURL=LayaUISample.js.map
