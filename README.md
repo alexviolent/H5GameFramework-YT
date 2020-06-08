@@ -13,5 +13,5 @@ MVC的思想基本上是逻辑和视图分离，这里的Controller也就是Comm
 
 而在Mediator和View之间加一个Contract即可实现MVP模式，Mediator对应Presenter。
 ========================
-# 未完待续
+
 
